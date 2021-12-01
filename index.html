@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Socket.IO chat</title>
+</head>
+
+<body>
+  <div id="messages">
+    <ul id="message-list"></ul>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    socket.on('message', (message) => {
+      console.log(`received message: ${JSON.stringify(message)}`);
+      if (message.from && message.body) {
+        var ul = document.getElementById('message-list');
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${message.from}: ${message.body}`));
+        ul.appendChild(li);
+      }
+    })
+  </script>
+</body>
+
+</html>
