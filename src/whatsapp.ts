@@ -1,7 +1,10 @@
 import * as fs from 'fs/promises';
 import * as  qrcode from 'qrcode-terminal';
 import WAWebJS, { Client } from 'whatsapp-web.js';
+import { v4 as uuidv4 } from 'uuid';
 import EventEmitter from 'events';
+
+import { Message } from './model';
 
 const SESSION_FILE_PATH = __dirname + '/../session.json';
 
@@ -53,7 +56,14 @@ export class WhatsAppClient extends EventEmitter{
     this._client.on('message_create', (message) => {
       const from = this._contacts?.getName(message.from);
       const to = this._contacts?.getName(message.to);
-      const simpleMessage = { body: message.body, from, to };
+      const simpleMessage: Message = { 
+        id: uuidv4(),
+        text: message.body,
+        from,
+        to,
+        timestamp: Date.now(),
+        show: false,
+      };
       this.emit('message', simpleMessage);
     });
 

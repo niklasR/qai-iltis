@@ -1,3 +1,4 @@
+import * as fs from 'fs/promises';
 import express from "express";
 import webpack, { Configuration } from 'webpack';
 import http from 'http';
@@ -9,7 +10,10 @@ import history from 'connect-history-api-fallback';
 import api from './api/index';
 
 import config from '../webpack.config.js';
-import { AppData } from "./model";
+import { AppData, Message } from "./model";
+import { loadAppDataFromDisk } from './loadAppDataFromDisk';
+
+export const APPDATA_PERSISTENCE_FILE_PATH = __dirname + '/../appData.json';
 
 const app = express();
 const compiler = webpack(config as Configuration);
@@ -29,34 +33,15 @@ const io = new Server(server);
 
 const wa = new WhatsAppClient();
 const activeSockets: Set<Socket> = new Set();
-const appData: AppData = {
-  messages: [
-    {
-      id: 'd7740221-6061-46f2-b2aa-e31837506a19',
-      from: 'Nik',
-      text: 'Hey there people, I\'m just testing the message implementation',
-      timestamp: '2021-11-30T17:28:30',
-      show: true
-    },
-    {
-      id: 'af603643-1c88-494a-be00-cf951fb3c0cc',
-      from: 'Pete Ludlow',
-      text: 'You do know these are all just hardcoded dummies, don\'t you? 👻',
-      timestamp: '2021-11-30T12:34:47',
-      show: false
-    }
-  ],
-  elements: {
-    ticker: {
-      show: true
-    }
-  }
-};
 
-function broadcastAppData() {
+const appData: AppData = loadAppDataFromDisk();
+
+async function handleAppDataUpdate() {
   activeSockets.forEach((socket) => {
     socket.emit('dataUpdate', appData);
   });
+
+  await fs.writeFile(APPDATA_PERSISTENCE_FILE_PATH, JSON.stringify(appData), 'utf-8');
 }
 
 server.listen(port, async () => {
@@ -65,12 +50,11 @@ server.listen(port, async () => {
   // Initialise Whatsapp
   await wa.init();
 
-  wa.on('message', (message) => {
+  wa.on('message', async (message: Message) => {
     console.log(`WA: MESSAGE: ${JSON.stringify(message, null, 2)}`);
 
-    activeSockets.forEach((socket) => {
-      socket.send(message);
-    });
+    appData.messages.push(message);
+    await handleAppDataUpdate();
   });
 
   io.on('connection', (socket) => {
@@ -83,12 +67,12 @@ server.listen(port, async () => {
       console.log('IO: message: ' + data);
     });
 
-    socket.on('dataChange', (data) => {
+    socket.on('dataChange', async (data) => {
       console.log('IO: dataChange:', JSON.stringify(data));
       if (data.type === 'showMessage') {
         const i = appData.messages.findIndex((message) => message.id === data.id);
         appData.messages[i].show = data.show;
-        broadcastAppData();
+        await handleAppDataUpdate();
       }
     });
 

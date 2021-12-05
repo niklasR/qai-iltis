@@ -1,8 +1,9 @@
 export interface Message {
   id: string;
   text: string;
-  from: string;
-  timestamp: string;
+  from?: string;
+  to?: string;
+  timestamp: number;
   show: boolean;
 }
 
