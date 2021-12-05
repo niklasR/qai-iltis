@@ -60,13 +60,13 @@ function broadcastAppData() {
 }
 
 server.listen(port, async () => {
-  console.log(`server started at http://localhost:${port}`);
+  console.log(`SERVER: Server started at http://localhost:${port}`);
 
   // Initialise Whatsapp
   await wa.init();
 
   wa.on('message', (message) => {
-    console.log(`MESSAGE: ${JSON.stringify(message, null, 2)}`);
+    console.log(`WA: MESSAGE: ${JSON.stringify(message, null, 2)}`);
 
     activeSockets.forEach((socket) => {
       socket.send(message);
@@ -74,27 +74,26 @@ server.listen(port, async () => {
   });
 
   io.on('connection', (socket) => {
-    console.log('user connected');
+    console.log('IO: user connected');
     activeSockets.add(socket);
 
     socket.send('welcome');
     socket.emit('dataUpdate', appData);
     socket.on('message', (data) => {
-      console.log('message: ' + data);
+      console.log('IO: message: ' + data);
     });
 
     socket.on('dataChange', (data) => {
-      console.log('dataChange:', JSON.stringify(data));
+      console.log('IO: dataChange:', JSON.stringify(data));
       if (data.type === 'showMessage') {
         const i = appData.messages.findIndex((message) => message.id === data.id);
-        console.log(`Message ${data.id} is in index ${i}`);
         appData.messages[i].show = data.show;
         broadcastAppData();
       }
     });
 
     socket.on('disconnect', () => {
-      console.log('user disconnected');
+      console.log('IO: user disconnected');
       activeSockets.delete(socket);
     });
   });

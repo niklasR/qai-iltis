@@ -58,17 +58,17 @@ export class WhatsAppClient extends EventEmitter{
     });
 
     this._client.on('disconnected', (reason) => {
-      console.log('disconnected', reason);
+      console.log('WAC: disconnected', reason);
     });
 
     this._client.on('auth_failure', (reason) => {
-      console.log('auth_failure', reason);
+      console.log('WAC: auth_failure', reason);
     });
 
     this._client.on('change_state', (reason) => {
-      console.log('change_state', reason);
+      console.log('WAC: change_state', reason);
     });
-    console.log('Initialised client.');
+    console.log('WAC: Initialised client.');
     this._isInitialised = true;
     return this._client;
   }
@@ -78,16 +78,16 @@ export class WhatsAppClient extends EventEmitter{
       const session = JSON.parse(await fs.readFile(SESSION_FILE_PATH, 'utf-8'));
       return session;
     } catch (error) {
-      console.log(`No session found: ${(error as Error).message}.`);
+      console.log(`WAC: No session found: ${(error as Error).message}.`);
       return;
     }
   }
 
   private async createClient(): Promise<Client> {
-    console.log('Initialising..');
+    console.log('WAC: Initialising..');
     const session = await this.loadSessionFromDisk();
     if (session) {
-      console.log('Found previous session. Loading..');
+      console.log('WAC: Found previous session. Loading..');
       const client = new Client({
         session
       });
@@ -95,7 +95,7 @@ export class WhatsAppClient extends EventEmitter{
       return client;
     }
 
-    console.log('Creating client without session');
+    console.log('WAC: Creating client without session');
     const client = new Client({});
 
     client.on('qr', (qr) => {
@@ -103,17 +103,17 @@ export class WhatsAppClient extends EventEmitter{
     });
 
     client.on('authenticated', async (session) => {
-      console.log('Authenticated. Storing session.');
+      console.log('WAC: Authenticated. Storing session.');
       try {
         await fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), 'utf-8');
-        console.log('Stored session');
+        console.log('WAC: Stored session');
       } catch (error) {
-        return console.log('Failed writing session file', (error as Error).message);
+        return console.log('WAC: Failed writing session file', (error as Error).message);
       }
     });
 
     client.on('ready', () => {
-      console.log('Client is ready!');
+      console.log('WAC: Client is ready!');
     });
 
     await client.initialize();

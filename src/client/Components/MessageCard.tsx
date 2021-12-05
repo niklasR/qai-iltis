@@ -5,7 +5,6 @@ import { Socket } from 'socket.io';
 
 export default function MessageCard(message: Message, socket: Socket) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(`changing data for ${message.id} to ${event.target.checked}`);
     socket.emit('dataChange', { type: 'showMessage', id: message.id, show: event.target.checked });
   };
 

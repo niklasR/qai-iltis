@@ -7,7 +7,6 @@ import { AppData } from '../../model';
 
 
 export function UI({ appData }: { appData: AppData }): React.ReactElement {
-  console.log(appData);
   const theme = useTheme();
   const [pageIsVisible, setPageIsVisible] = useState(true);
 
@@ -30,7 +29,6 @@ export function UI({ appData }: { appData: AppData }): React.ReactElement {
               {({ index }) => {
                 const activeMessages = appData.messages.filter(message => message.show);
                 const nextMessage = activeMessages[index % activeMessages.length];
-                console.log('nextMessage', nextMessage);
                 return nextMessage ? (
                   <Typography paragraph sx={{ fontSize: 40, whiteSpace: 'nowrap', paddingRight: 20 }}>
                     {nextMessage.from}: {nextMessage.text}
