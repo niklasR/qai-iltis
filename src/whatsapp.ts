@@ -3,7 +3,7 @@ import * as  qrcode from 'qrcode-terminal';
 import WAWebJS, { Client } from 'whatsapp-web.js';
 import EventEmitter from 'events';
 
-const SESSION_FILE_PATH = './session.json';
+const SESSION_FILE_PATH = __dirname + '/../session.json';
 
 class ContactsDb {
   private contacts: WAWebJS.Contact[];
@@ -15,11 +15,12 @@ class ContactsDb {
   public getName(id: string) {
     const contact = this.contacts.find((contact) => {
       return contact.id._serialized === id;
-    })
+    });
     return contact?.name ?? id;
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => { };
 
 export class WhatsAppClient extends EventEmitter{
@@ -53,8 +54,8 @@ export class WhatsAppClient extends EventEmitter{
       const from = this._contacts?.getName(message.from);
       const to = this._contacts?.getName(message.to);
       const simpleMessage = { body: message.body, from, to };
-      this.emit('message', simpleMessage)
-    })
+      this.emit('message', simpleMessage);
+    });
 
     this._client.on('disconnected', (reason) => {
       console.log('disconnected', reason);
@@ -67,7 +68,7 @@ export class WhatsAppClient extends EventEmitter{
     this._client.on('change_state', (reason) => {
       console.log('change_state', reason);
     });
-    console.log('Initialised client.')
+    console.log('Initialised client.');
     this._isInitialised = true;
     return this._client;
   }
@@ -77,13 +78,13 @@ export class WhatsAppClient extends EventEmitter{
       const session = JSON.parse(await fs.readFile(SESSION_FILE_PATH, 'utf-8'));
       return session;
     } catch (error) {
-      console.log(`No session found: ${(error as Error).message}.`)
+      console.log(`No session found: ${(error as Error).message}.`);
       return;
     }
   }
 
   private async createClient(): Promise<Client> {
-    console.log('Initialising..')
+    console.log('Initialising..');
     const session = await this.loadSessionFromDisk();
     if (session) {
       console.log('Found previous session. Loading..');
@@ -102,7 +103,7 @@ export class WhatsAppClient extends EventEmitter{
     });
 
     client.on('authenticated', async (session) => {
-      console.log('Authenticated. Storing session.')
+      console.log('Authenticated. Storing session.');
       try {
         await fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), 'utf-8');
         console.log('Stored session');
