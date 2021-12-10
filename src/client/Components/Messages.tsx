@@ -21,6 +21,8 @@ export function Messages({ appData, socket, mode }: { appData: AppData, socket: 
       <Grid container spacing={3}>
         {appData.messages.filter((message) => {
           return message.state === mode;
+        }).sort((a, b) => {
+          return a.timestamp - b.timestamp;
         }).map(createMessagesCard)}
       </Grid>
     </Box>

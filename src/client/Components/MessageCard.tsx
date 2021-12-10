@@ -34,7 +34,7 @@ export default function MessageCard(message: Message, socket: Socket) {
           FROM: {message.from}
         </p>
         <p>
-          TIME: {message.timestamp}
+          TIME: {(new Date(message.timestamp)).toLocaleString()}
         </p>
         <p>
           SHOW: <Switch checked={message.state === MessageState.SHOWING} onChange={handleShowChange}
