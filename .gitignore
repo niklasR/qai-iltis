@@ -1,4 +1,4 @@
 session.json
-*.js
+dist
 node_modules
 appData.json
