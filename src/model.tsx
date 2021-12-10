@@ -1,8 +1,8 @@
 export enum DataChangeType {
-  addMessage,
-  showMessage,
-  ignoreMessage,
-  removeMessage
+  ADD_MESSAGE = 'addMessage',
+  SHOW_MESSAGE = 'showMessage',
+  IGNORE_MESSAGE = 'ignoreMessage',
+  REMOVE_MESSAGE = 'removeMessage'
 }
 
 export interface Message {

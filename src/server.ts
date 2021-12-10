@@ -69,17 +69,17 @@ server.listen(port, async () => {
 
     socket.on('dataChange', async (data) => {
       console.log('IO: dataChange:', JSON.stringify(data));
-      if (data.type === DataChangeType.showMessage) {
+      if (data.type === DataChangeType.SHOW_MESSAGE) {
         const i = appData.messages.findIndex((message) => message.id === data.id);
         appData.messages[i].state = MessageState.SHOWING;
         await handleAppDataUpdate();
       }
-      if (data.type === DataChangeType.ignoreMessage) {
+      if (data.type === DataChangeType.IGNORE_MESSAGE) {
         const i = appData.messages.findIndex((message) => message.id === data.id);
         appData.messages[i].state = MessageState.IGNORED;
         await handleAppDataUpdate();
       }
-      if (data.type === DataChangeType.removeMessage) {
+      if (data.type === DataChangeType.REMOVE_MESSAGE) {
         const i = appData.messages.findIndex((message) => message.id === data.id);
         appData.messages[i].state = MessageState.REMOVED;
         await handleAppDataUpdate();
