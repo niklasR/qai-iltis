@@ -87,8 +87,8 @@ const App = () => {
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
+              {Home}
             </Box>
-            {Home}
           </Route>
         </Switch>
       </ThemeProvider>
