@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Box, Grid, Toolbar } from '@mui/material';
-import { AppData, Message } from '../../model';
+import { MessageState, AppData, Message } from '../../model';
 import MessageCard from './MessageCard';
 import { Socket } from 'socket.io';
 
-export function Messages({ appData, socket }: { appData: AppData, socket: Socket }) {
+
+export function Messages({ appData, socket, mode }: { appData: AppData, socket: Socket, mode: MessageState }) {
 
   function createMessagesCard(Message: Message): JSX.Element {
     return (
@@ -18,7 +19,9 @@ export function Messages({ appData, socket }: { appData: AppData, socket: Socket
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <Toolbar />
       <Grid container spacing={3}>
-        {appData.messages.map(createMessagesCard)}
+        {appData.messages.filter((message) => {
+          return message.state === mode;
+        }).map(createMessagesCard)}
       </Grid>
     </Box>
   );

@@ -4,7 +4,7 @@ import WAWebJS, { Client } from 'whatsapp-web.js';
 import { v4 as uuidv4 } from 'uuid';
 import EventEmitter from 'events';
 
-import { Message } from './model';
+import { Message, MessageState } from './model';
 
 const SESSION_FILE_PATH = __dirname + '/../session.json';
 
@@ -53,7 +53,7 @@ export class WhatsAppClient extends EventEmitter{
     const rawContacts = await this._client.getContacts();
     this._contacts = new ContactsDb(rawContacts);
 
-    this._client.on('message_create', (message) => {
+    this._client.on('message_create', (message: WAWebJS.Message) => {
       const from = this._contacts?.getName(message.from);
       const to = this._contacts?.getName(message.to);
       const simpleMessage: Message = { 
@@ -62,7 +62,7 @@ export class WhatsAppClient extends EventEmitter{
         from,
         to,
         timestamp: Date.now(),
-        show: false,
+        state: MessageState.ARRIVED
       };
       this.emit('message', simpleMessage);
     });

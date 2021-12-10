@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { Card, Switch, CardContent } from '@mui/material';
-import { Message } from '../../model';
+import { Message, MessageState, DataChangeType } from '../../model';
 import { Socket } from 'socket.io';
 
 export default function MessageCard(message: Message, socket: Socket) {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    socket.emit('dataChange', { type: 'showMessage', id: message.id, show: event.target.checked });
+  const handleShowChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      socket.emit('dataChange', { type: DataChangeType.showMessage, id: message.id });
+    } else {
+      socket.emit('dataChange', { type: DataChangeType.removeMessage, id: message.id });
+    }
   };
 
   return (
@@ -21,7 +25,7 @@ export default function MessageCard(message: Message, socket: Socket) {
           TIME: {message.timestamp}
         </p>
         <p>
-          SHOW: <Switch checked={message.show} onChange={handleChange}
+          SHOW: <Switch checked={message.state === MessageState.SHOWING} onChange={handleShowChange}
           />
         </p>
       </CardContent>
