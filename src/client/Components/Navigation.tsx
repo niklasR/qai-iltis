@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import PeopleIcon from '@mui/icons-material/People';
+import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
+import SettingsIcon from '@mui/icons-material/Settings';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { Box, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
 
 const drawerWidth = 240;
@@ -17,25 +22,25 @@ export const Navigation = <Drawer
   <Toolbar />
   <Box sx={{ overflow: 'auto' }}>
     <List>
-      <ListItem component={Link} to="/messages/arrived" key="Arrived Messages">
+      <ListItem component={Link} to="/messages/arrived" key="New Messages">
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Arrived Messages" />
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="New Messages" />
       </ListItem>
     </List>
     <List>
-      <ListItem component={Link} to="/messages/showing" key="Showing Messages">
+      <ListItem component={Link} to="/messages/showing" key="LIVE Messages">
         <ListItemIcon>
-          <InboxIcon />
+          <NotificationsActiveIcon />
         </ListItemIcon>
-        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Showing Messages" />
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="LIVE Messages" />
       </ListItem>
     </List>
     <List>
       <ListItem component={Link} to="/messages/shown" key="Shown Messages">
         <ListItemIcon>
-          <InboxIcon />
+          <MarkEmailReadIcon />
         </ListItemIcon>
         <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Shown Messages" />
       </ListItem>
@@ -43,7 +48,7 @@ export const Navigation = <Drawer
     <List>
       <ListItem component={Link} to="/messages/ignored" key="Ignored Messages">
         <ListItemIcon>
-          <InboxIcon />
+          <DeleteIcon />
         </ListItemIcon>
         <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Ignored Messages" />
       </ListItem>
@@ -52,7 +57,7 @@ export const Navigation = <Drawer
     <List>
       <ListItem component={Link} to="/ui" key="UI">
         <ListItemIcon>
-          <PeopleIcon />
+          <LiveTvIcon />
         </ListItemIcon>
         <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="UI" />
       </ListItem>
