@@ -21,6 +21,13 @@ export default function MessageCard(message: Message, socket: Socket) {
     socket.emit('dataChange', { type: DataChangeType.IGNORE_MESSAGE, id: message.id });
   };
 
+  const getTextAndImage = () => {
+    if(message.attachment){
+      return ( <>, {message.text}, <img src={`data:image/jpg;base64,${message.attachment.data}`}/></>);
+    }
+    return ( message.text );
+  };
+
   return (
     <Card variant="outlined">
       {message.state === MessageState.ARRIVED ?
@@ -33,7 +40,7 @@ export default function MessageCard(message: Message, socket: Socket) {
       <CardContent>
         <TextField id="input-from" sx={{ padding: '10px' }} label="From" variant="outlined" value={message.from} onChange={handleFromChange} />
         <br />
-        <TextField id="input-text" sx={{ padding: '10px' }} label="Text" multiline InputProps={{ readOnly: true, }} maxRows={4} value={message.text} />
+        <TextField id="input-text" sx={{ padding: '10px' }} label="Text" multiline InputProps={{ readOnly: true, }} maxRows={4} value={getTextAndImage()} />
         <p>
           TIME: {(new Date(message.timestamp)).toLocaleString()}
         </p>

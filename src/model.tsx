@@ -11,6 +11,7 @@ export interface Message {
   text: string;
   from?: string;
   to?: string;
+  attachment?: MessageAttachment;
   timestamp: number;
   state: MessageState;
 }
@@ -22,6 +23,11 @@ export enum MessageState {
   IGNORED = 'ignored'
 }
 
+export interface MessageAttachment {
+  mimetype: string;
+  data: string;
+  filename?: string | null;
+}
 export interface Ticker {
   show: boolean;
 }
