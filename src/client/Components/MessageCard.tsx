@@ -23,9 +23,9 @@ export default function MessageCard(message: Message, socket: Socket) {
 
   const getTextAndImage = () => {
     if(message.attachment){
-      return ({message.text}<img src={`data:image/jpg;base64,${message.attachment.data}`}/>);
+      return ( <>, {message.text}, <img src={`data:image/jpg;base64,${message.attachment.data}`}/></>);
     }
-    return ( {message.text} );
+    return ( message.text );
   };
 
   return (
