@@ -1,10 +1,14 @@
 import * as React from 'react';
-import { Card, Switch, CardContent, IconButton } from '@mui/material';
+import { Card, Switch, CardContent, IconButton, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Message, MessageState, DataChangeType } from '../../model';
 import { Socket } from 'socket.io';
 
 export default function MessageCard(message: Message, socket: Socket) {
+  const handleFromChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    socket.emit('dataChange', { type: DataChangeType.AMEND_FROM, id: message.id, newFrom: event.target.value });
+  };
+
   const handleShowChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       socket.emit('dataChange', { type: DataChangeType.SHOW_MESSAGE, id: message.id });
@@ -27,12 +31,9 @@ export default function MessageCard(message: Message, socket: Socket) {
         ) : ''
       }
       <CardContent>
-        <p>
-          {message.text}
-        </p>
-        <p style={{ fontStyle: "italic" }}>
-          FROM: {message.from}
-        </p>
+        <TextField id="input-from" sx={{ padding: '10px' }} label="From" variant="outlined" value={message.from} onChange={handleFromChange} />
+        <br />
+        <TextField id="input-text" sx={{ padding: '10px' }} label="Text" multiline InputProps={{ readOnly: true, }} maxRows={4} value={message.text} />
         <p>
           TIME: {(new Date(message.timestamp)).toLocaleString()}
         </p>

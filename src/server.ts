@@ -84,6 +84,11 @@ server.listen(port, async () => {
         appData.messages[i].state = MessageState.REMOVED;
         await handleAppDataUpdate();
       }
+      if (data.type === DataChangeType.AMEND_FROM) {
+        const i = appData.messages.findIndex((message) => message.id === data.id);
+        appData.messages[i].from = data.newFrom;
+        await handleAppDataUpdate();
+      }
     });
 
     socket.on('disconnect', () => {
