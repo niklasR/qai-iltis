@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Ticker from 'react-ticker';
 import PageVisibility from 'react-page-visibility';
-import { AppData } from '../../model';
+import { AppData, MessageState } from '../../model';
 
 
 export function UI({ appData }: { appData: AppData }): React.ReactElement {
@@ -27,7 +27,7 @@ export function UI({ appData }: { appData: AppData }): React.ReactElement {
           {pageIsVisible && (
             <Ticker offset={0} speed={25}>
               {({ index }) => {
-                const activeMessages = appData.messages.filter(message => message.show);
+                const activeMessages = appData.messages.filter(message => message.state === MessageState.SHOWING);
                 const nextMessage = activeMessages[index % activeMessages.length];
                 return nextMessage ? (
                   <Typography paragraph sx={{ fontSize: 40, whiteSpace: 'nowrap', paddingRight: 20 }}>

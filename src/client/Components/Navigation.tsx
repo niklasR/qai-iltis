@@ -17,11 +17,35 @@ export const Navigation = <Drawer
   <Toolbar />
   <Box sx={{ overflow: 'auto' }}>
     <List>
-      <ListItem component={Link} to="/messages" key="Messages">
+      <ListItem component={Link} to="/messages/arrived" key="Arrived Messages">
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Messages" />
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Arrived Messages" />
+      </ListItem>
+    </List>
+    <List>
+      <ListItem component={Link} to="/messages/showing" key="Showing Messages">
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Showing Messages" />
+      </ListItem>
+    </List>
+    <List>
+      <ListItem component={Link} to="/messages/shown" key="Shown Messages">
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Shown Messages" />
+      </ListItem>
+    </List>
+    <List>
+      <ListItem component={Link} to="/messages/ignored" key="Ignored Messages">
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Ignored Messages" />
       </ListItem>
     </List>
     <Divider />

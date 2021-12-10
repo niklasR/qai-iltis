@@ -10,7 +10,7 @@ import history from 'connect-history-api-fallback';
 import api from './api/index';
 
 import config from '../webpack.config.js';
-import { AppData, Message } from "./model";
+import { AppData, DataChangeType, Message, MessageState } from "./model";
 import { loadAppDataFromDisk } from './loadAppDataFromDisk';
 
 export const APPDATA_PERSISTENCE_FILE_PATH = __dirname + '/../appData.json';
@@ -69,9 +69,24 @@ server.listen(port, async () => {
 
     socket.on('dataChange', async (data) => {
       console.log('IO: dataChange:', JSON.stringify(data));
-      if (data.type === 'showMessage') {
+      if (data.type === DataChangeType.SHOW_MESSAGE) {
         const i = appData.messages.findIndex((message) => message.id === data.id);
-        appData.messages[i].show = data.show;
+        appData.messages[i].state = MessageState.SHOWING;
+        await handleAppDataUpdate();
+      }
+      if (data.type === DataChangeType.IGNORE_MESSAGE) {
+        const i = appData.messages.findIndex((message) => message.id === data.id);
+        appData.messages[i].state = MessageState.IGNORED;
+        await handleAppDataUpdate();
+      }
+      if (data.type === DataChangeType.REMOVE_MESSAGE) {
+        const i = appData.messages.findIndex((message) => message.id === data.id);
+        appData.messages[i].state = MessageState.REMOVED;
+        await handleAppDataUpdate();
+      }
+      if (data.type === DataChangeType.AMEND_FROM) {
+        const i = appData.messages.findIndex((message) => message.id === data.id);
+        appData.messages[i].from = data.newFrom;
         await handleAppDataUpdate();
       }
     });

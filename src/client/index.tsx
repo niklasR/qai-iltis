@@ -9,7 +9,7 @@ import { UI } from './Components/UI';
 import { Header } from './Components/Header';
 import { Navigation } from './Components/Navigation';
 import { theme } from './theme';
-import { AppData } from '../model';
+import { AppData, MessageState } from '../model';
 
 const defaultAppData: AppData = {
   messages: [],
@@ -52,11 +52,32 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Switch>
-          <Route path="/messages">
+          <Route path="/messages/arrived">
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Messages appData={appData} socket={socket} />
+              <Messages appData={appData} socket={socket} mode={MessageState.ARRIVED}/>
+            </Box>
+          </Route>
+          <Route path="/messages/showing">
+            <Box sx={{ display: 'flex' }}>
+              {Header}
+              {Navigation}
+              <Messages appData={appData} socket={socket} mode={MessageState.SHOWING}/>
+            </Box>
+          </Route>
+          <Route path="/messages/shown">
+            <Box sx={{ display: 'flex' }}>
+              {Header}
+              {Navigation}
+              <Messages appData={appData} socket={socket} mode={MessageState.REMOVED}/>
+            </Box>
+          </Route>
+          <Route path="/messages/ignored">
+            <Box sx={{ display: 'flex' }}>
+              {Header}
+              {Navigation}
+              <Messages appData={appData} socket={socket} mode={MessageState.IGNORED}/>
             </Box>
           </Route>
           <Route path="/ui">
