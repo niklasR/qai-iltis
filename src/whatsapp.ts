@@ -53,14 +53,16 @@ export class WhatsAppClient extends EventEmitter{
     const rawContacts = await this._client.getContacts();
     this._contacts = new ContactsDb(rawContacts);
 
-    this._client.on('message_create', (message) => {
+    this._client.on('message_create', async (message) => {
       const from = this._contacts?.getName(message.from);
       const to = this._contacts?.getName(message.to);
+      const attachment = message.hasMedia ? await message.downloadMedia() : undefined;
       const simpleMessage: Message = { 
         id: uuidv4(),
         text: message.body,
         from,
         to,
+        attachment,
         timestamp: Date.now(),
         show: false,
       };

@@ -8,11 +8,18 @@ export default function MessageCard(message: Message, socket: Socket) {
     socket.emit('dataChange', { type: 'showMessage', id: message.id, show: event.target.checked });
   };
 
+  const addImage = () => {
+    if(message.attachment){
+      return (<img src={`data:image/jpg;base64,${message.attachment.data}`}/>);
+    }
+  };
+
   return (
     <Card variant="outlined">
       <CardContent>
         <p>
           {message.text}
+          {addImage()}
         </p>
         <p style={{ fontStyle: "italic" }}>
           FROM: {message.from}
