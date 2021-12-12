@@ -5,7 +5,7 @@ import MessageCard from './MessageCard';
 import { Socket } from 'socket.io';
 
 
-export function Messages({ appData, socket, mode }: { appData: AppData, socket: Socket, mode: MessageState }) {
+export function Images({ appData, socket, mode }: { appData: AppData, socket: Socket, mode?: MessageState }) {
 
   function createMessagesCard(Message: Message): JSX.Element {
     return (
@@ -21,8 +21,7 @@ export function Messages({ appData, socket, mode }: { appData: AppData, socket: 
       <Grid container spacing={3}>
         {appData.messages.filter((message) => {
           const matchesMode = message.state === mode;
-          const noAttachment = !message.attachment;
-          return matchesMode && noAttachment;
+          return matchesMode && message.attachment;
         }).sort((a, b) => {
           return a.timestamp - b.timestamp;
         }).map(createMessagesCard)}

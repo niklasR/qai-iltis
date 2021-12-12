@@ -4,6 +4,9 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import SettingsIcon from '@mui/icons-material/Settings';
+import ImageIcon from '@mui/icons-material/Image';
+import BrokenImageIcon from '@mui/icons-material/BrokenImage';
+import PhotoCameraBackIcon from '@mui/icons-material/PhotoCameraBack';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -46,11 +49,44 @@ export const Navigation = <Drawer
       </ListItem>
     </List>
     <List>
-      <ListItem component={Link} to="/messages/ignored" key="Ignored Messages">
+      <ListItem component={Link} to="/messages/bin" key="Message Bin">
         <ListItemIcon>
           <DeleteIcon />
         </ListItemIcon>
-        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Ignored Messages" />
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Message Bin" />
+      </ListItem>
+    </List>
+    <Divider />
+    <List>
+      <ListItem component={Link} to="/images/arrived" key="Images">
+        <ListItemIcon>
+          <ImageIcon />
+        </ListItemIcon>
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="New Images" />
+      </ListItem>
+    </List>
+    <List>
+      <ListItem component={Link} to="/images/showing" key="Images">
+        <ListItemIcon>
+          <PhotoCameraBackIcon />
+        </ListItemIcon>
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Live Image" />
+      </ListItem>
+    </List>
+    <List>
+      <ListItem component={Link} to="/images/shown" key="Images">
+        <ListItemIcon>
+          <BrokenImageIcon />
+        </ListItemIcon>
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Shown Images" />
+      </ListItem>
+    </List>
+    <List>
+      <ListItem component={Link} to="/images/bin" key="Images">
+        <ListItemIcon>
+          <DeleteIcon />
+        </ListItemIcon>
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Image Bin" />
       </ListItem>
     </List>
     <Divider />

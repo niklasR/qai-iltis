@@ -11,6 +11,7 @@ import { Header } from './Components/Header';
 import { Navigation } from './Components/Navigation';
 import { theme } from './theme';
 import { AppData, MessageState } from '../model';
+import { Images } from './Components/Images';
 
 const defaultAppData: AppData = {
   messages: [],
@@ -57,35 +58,63 @@ const App = () => {
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Messages appData={appData} socket={socket} mode={MessageState.ARRIVED}/>
+              <Messages appData={appData} socket={socket} mode={MessageState.ARRIVED} />
             </Box>
           </Route>
           <Route path="/messages/showing">
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Messages appData={appData} socket={socket} mode={MessageState.SHOWING}/>
+              <Messages appData={appData} socket={socket} mode={MessageState.SHOWING} />
             </Box>
           </Route>
           <Route path="/messages/shown">
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Messages appData={appData} socket={socket} mode={MessageState.REMOVED}/>
+              <Messages appData={appData} socket={socket} mode={MessageState.REMOVED} />
             </Box>
           </Route>
-          <Route path="/messages/ignored">
+          <Route path="/messages/bin">
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Messages appData={appData} socket={socket} mode={MessageState.IGNORED}/>
+              <Messages appData={appData} socket={socket} mode={MessageState.IGNORED} />
+            </Box>
+          </Route>
+          <Route path="/images/arrived">
+            <Box sx={{ display: 'flex' }}>
+              {Header}
+              {Navigation}
+              <Images appData={appData} socket={socket} mode={MessageState.ARRIVED} />
+            </Box>
+          </Route>
+          <Route path="/images/showing">
+            <Box sx={{ display: 'flex' }}>
+              {Header}
+              {Navigation}
+              <Images appData={appData} socket={socket} mode={MessageState.SHOWING} />
+            </Box>
+          </Route>
+          <Route path="/images/shown">
+            <Box sx={{ display: 'flex' }}>
+              {Header}
+              {Navigation}
+              <Images appData={appData} socket={socket} mode={MessageState.REMOVED} />
+            </Box>
+          </Route>
+          <Route path="/images/bin">
+            <Box sx={{ display: 'flex' }}>
+              {Header}
+              {Navigation}
+              <Images appData={appData} socket={socket} mode={MessageState.IGNORED} />
             </Box>
           </Route>
           <Route path="/ticker">
-            <Ticker appData={appData} backgroundColor="#f0f"/>
+            <Ticker appData={appData} backgroundColor="#f0f" />
           </Route>
           <Route path="/image-chroma">
-            <ImageChroma appData={appData} backgroundColor="#f0f"/>
+            <ImageChroma appData={appData} backgroundColor="#f0f" />
           </Route>
           <Route path="/">
             <Box sx={{ display: 'flex' }}>
