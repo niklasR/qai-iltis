@@ -72,14 +72,14 @@ const App = () => {
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Messages appData={appData} socket={socket} mode={MessageState.REMOVED} />
+              <Messages appData={appData} socket={socket} mode={MessageState.SHOWN} />
             </Box>
           </Route>
           <Route path="/messages/bin">
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Messages appData={appData} socket={socket} mode={MessageState.IGNORED} />
+              <Messages appData={appData} socket={socket} mode={MessageState.BIN} />
             </Box>
           </Route>
           <Route path="/images/arrived">
@@ -100,14 +100,14 @@ const App = () => {
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Images appData={appData} socket={socket} mode={MessageState.REMOVED} />
+              <Images appData={appData} socket={socket} mode={MessageState.SHOWN} />
             </Box>
           </Route>
           <Route path="/images/bin">
             <Box sx={{ display: 'flex' }}>
               {Header}
               {Navigation}
-              <Images appData={appData} socket={socket} mode={MessageState.IGNORED} />
+              <Images appData={appData} socket={socket} mode={MessageState.BIN} />
             </Box>
           </Route>
           <Route path="/ticker">

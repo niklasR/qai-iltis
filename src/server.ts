@@ -74,14 +74,18 @@ server.listen(port, async () => {
         appData.messages[i].state = MessageState.SHOWING;
         await handleAppDataUpdate();
       }
-      if (data.type === DataChangeType.IGNORE_MESSAGE) {
-        const i = appData.messages.findIndex((message) => message.id === data.id);
-        appData.messages[i].state = MessageState.IGNORED;
-        await handleAppDataUpdate();
-      }
       if (data.type === DataChangeType.REMOVE_MESSAGE) {
         const i = appData.messages.findIndex((message) => message.id === data.id);
-        appData.messages[i].state = MessageState.REMOVED;
+        if (appData.messages[i].state === MessageState.BIN) {
+          appData.messages.splice(i, 1);
+        } else {
+          appData.messages[i].state = MessageState.BIN;
+        }
+        await handleAppDataUpdate();
+      }
+      if (data.type === DataChangeType.UNSHOW_MESSAGE) {
+        const i = appData.messages.findIndex((message) => message.id === data.id);
+        appData.messages[i].state = MessageState.SHOWN;
         await handleAppDataUpdate();
       }
       if (data.type === DataChangeType.AMEND_FROM) {

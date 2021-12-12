@@ -1,8 +1,8 @@
 export enum DataChangeType {
   ADD_MESSAGE = 'addMessage',
   SHOW_MESSAGE = 'showMessage',
-  IGNORE_MESSAGE = 'ignoreMessage',
   REMOVE_MESSAGE = 'removeMessage',
+  UNSHOW_MESSAGE = 'unshowMessage',
   AMEND_FROM = 'amendFrom'
 }
 
@@ -19,8 +19,8 @@ export interface Message {
 export enum MessageState {
   ARRIVED = 'arrived',
   SHOWING = 'showing',
-  REMOVED = 'removed',
-  IGNORED = 'ignored'
+  SHOWN = 'shown',
+  BIN = 'binned'
 }
 
 export interface MessageAttachment {
