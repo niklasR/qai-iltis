@@ -104,6 +104,10 @@ server.listen(port, async () => {
         appData.messages[i].from = data.newFrom;
         await handleAppDataUpdate();
       }
+      if (data.type === DataChangeType.TOGGLE_TICKER) {
+        appData.elements.ticker.show = data.show;
+        await handleAppDataUpdate();
+      }
     });
 
     socket.on('disconnect', () => {

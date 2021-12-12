@@ -16,7 +16,7 @@ export function Ticker({ appData, backgroundColor }: { appData: AppData, backgro
 
   return (
     <Box sx={{ display: 'fixed', position: 'relative', height: '1080px', width: '1920px', backgroundColor, overflow: 'hidden' }}>
-      <Box sx={{
+      {appData.elements.ticker.show && <Box sx={{
         position: 'absolute',
         height: '60px',
         width: '100%',
@@ -45,6 +45,7 @@ export function Ticker({ appData, backgroundColor }: { appData: AppData, backgro
           )}
         </PageVisibility>
       </Box>
+      }
     </Box>
   );
 }

@@ -57,56 +57,56 @@ const App = () => {
           <Route path="/messages/arrived">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               <Messages appData={appData} socket={socket} mode={MessageState.ARRIVED} />
             </Box>
           </Route>
           <Route path="/messages/showing">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               <Messages appData={appData} socket={socket} mode={MessageState.SHOWING} />
             </Box>
           </Route>
           <Route path="/messages/shown">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               <Messages appData={appData} socket={socket} mode={MessageState.SHOWN} />
             </Box>
           </Route>
           <Route path="/messages/bin">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               <Messages appData={appData} socket={socket} mode={MessageState.BIN} />
             </Box>
           </Route>
           <Route path="/images/arrived">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               <Images appData={appData} socket={socket} mode={MessageState.ARRIVED} />
             </Box>
           </Route>
           <Route path="/images/showing">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               <Images appData={appData} socket={socket} mode={MessageState.SHOWING} />
             </Box>
           </Route>
           <Route path="/images/shown">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               <Images appData={appData} socket={socket} mode={MessageState.SHOWN} />
             </Box>
           </Route>
           <Route path="/images/bin">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               <Images appData={appData} socket={socket} mode={MessageState.BIN} />
             </Box>
           </Route>
@@ -119,7 +119,7 @@ const App = () => {
           <Route path="/">
             <Box sx={{ display: 'flex' }}>
               {Header}
-              {Navigation}
+              <Navigation appData={appData} socket={socket} />
               {Home}
             </Box>
           </Route>

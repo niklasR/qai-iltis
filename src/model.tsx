@@ -4,7 +4,8 @@ export enum DataChangeType {
   REMOVE_MESSAGE = 'removeMessage',
   UNSHOW_MESSAGE = 'unshowMessage',
   UNARCHIVE_MESSAGE = 'unarchiveMessage',
-  AMEND_FROM = 'amendFrom'
+  AMEND_FROM = 'amendFrom',
+  TOGGLE_TICKER = 'toggleTicker'
 }
 
 export interface Message {
