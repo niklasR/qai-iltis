@@ -71,6 +71,12 @@ server.listen(port, async () => {
       console.log('IO: dataChange:', JSON.stringify(data));
       if (data.type === DataChangeType.SHOW_MESSAGE) {
         const i = appData.messages.findIndex((message) => message.id === data.id);
+        // if image, unshow any currently live images
+        if (appData.messages[i].attachment) {
+          appData.messages.forEach((message) => {
+            if (message.attachment && message.state === MessageState.SHOWING) message.state = MessageState.SHOWN;
+          });
+        }
         appData.messages[i].state = MessageState.SHOWING;
         await handleAppDataUpdate();
       }
