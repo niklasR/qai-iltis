@@ -6,11 +6,11 @@ TODO
 - add a 'SHOW TICKER' button that fades it up + starts it / hides with fade out transition
 - (alex) move some vars to extra ts file / json / yml
 - (alex) neaten up message cards
-- add 'ignore' button to all message panes (and make functional)
 - 1080p
 - animated bar chart react frontend
 - map thing (react simple maps)
 
 
 DONE
+- add 'ignore' button to all message panes (and make functional)
 - DONT SHOW MESSAGES WITH IMAGE IN ThE TICKER!!!
