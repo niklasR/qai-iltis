@@ -27,7 +27,11 @@ export function Ticker({ appData, backgroundColor }: { appData: AppData, backgro
           {pageIsVisible && (
             <ReactTicker offset={0} speed={25}>
               {({ index }) => {
-                const activeMessages = appData.messages.filter(message => message.state === MessageState.SHOWING);
+                const activeMessages = appData.messages.filter((message) => {
+                  const isShowing = message.state === MessageState.SHOWING;
+                  const hasNoAttachement = !message.attachment;
+                  return isShowing && hasNoAttachement;
+                });
                 const nextMessage = activeMessages[index % activeMessages.length];
                 return nextMessage ? (
                   <Typography paragraph sx={{ fontSize: 40, whiteSpace: 'nowrap', paddingRight: 20 }}>
