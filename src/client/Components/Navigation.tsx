@@ -55,11 +55,19 @@ export const Navigation = <Drawer
     </List>
     <Divider />
     <List>
-      <ListItem component={Link} to="/ui" key="UI">
+      <ListItem component={Link} to="/ticker" key="ticker-chroma">
         <ListItemIcon>
           <LiveTvIcon />
         </ListItemIcon>
-        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="UI" />
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Ticker (Chroma)" />
+      </ListItem>
+    </List>
+    <List>
+      <ListItem component={Link} to="/image-chroma" key="image-chroma">
+        <ListItemIcon>
+          <LiveTvIcon />
+        </ListItemIcon>
+        <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Image (Chroma)" />
       </ListItem>
     </List>
     <Divider />

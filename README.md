@@ -17,10 +17,8 @@ Before I could actually run it, I also had to manually run the puppeteer install
 
 `TS_NODE_CACHE=FALSE npm run start` starts a server on http://localhost:8080, serving the `index.html` and react app.
 
-The react app has three routes configured:
+The react app has routes configured:
 - `/`: Home for the control plane with nav bar
-- `/ui`: the TV UI
-- `/messages`: the message control plane
 
 The console should start showing the WhatsApp pairing instructions (a QR code) after some loading.
 The pairing process is completed when `Initialised client.` is displayed.

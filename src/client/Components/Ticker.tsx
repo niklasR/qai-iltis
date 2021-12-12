@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import Ticker from 'react-ticker';
+import ReactTicker from 'react-ticker';
 import PageVisibility from 'react-page-visibility';
 import { AppData, MessageState } from '../../model';
 
 
-export function UI({ appData }: { appData: AppData }): React.ReactElement {
+export function Ticker({ appData, backgroundColor }: { appData: AppData, backgroundColor: string }): React.ReactElement {
   const theme = useTheme();
   const [pageIsVisible, setPageIsVisible] = useState(true);
 
@@ -15,7 +15,7 @@ export function UI({ appData }: { appData: AppData }): React.ReactElement {
   };
 
   return (
-    <Box sx={{ display: 'fixed', position: 'relative', height: '720px', width: '1280px', backgroundColor: '#f0f', overflow: 'hidden' }}>
+    <Box sx={{ display: 'fixed', position: 'relative', height: '1080px', width: '1920px', backgroundColor, overflow: 'hidden' }}>
       <Box sx={{
         position: 'absolute',
         height: '60px',
@@ -25,7 +25,7 @@ export function UI({ appData }: { appData: AppData }): React.ReactElement {
       }}>
         <PageVisibility onChange={handleVisibilityChange}>
           {pageIsVisible && (
-            <Ticker offset={0} speed={25}>
+            <ReactTicker offset={0} speed={25}>
               {({ index }) => {
                 const activeMessages = appData.messages.filter(message => message.state === MessageState.SHOWING);
                 const nextMessage = activeMessages[index % activeMessages.length];
@@ -37,7 +37,7 @@ export function UI({ appData }: { appData: AppData }): React.ReactElement {
                   <p style={{ visibility: "hidden" }}>Placeholder</p>
                 );
               }}
-            </Ticker>
+            </ReactTicker>
           )}
         </PageVisibility>
       </Box>

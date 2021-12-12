@@ -5,7 +5,8 @@ import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import { io } from 'socket.io-client';
 import { Messages } from './Components/Messages';
 import { Home } from './Components/Home';
-import { UI } from './Components/UI';
+import { Ticker } from './Components/Ticker';
+import { ImageChroma } from './Components/ImageChroma';
 import { Header } from './Components/Header';
 import { Navigation } from './Components/Navigation';
 import { theme } from './theme';
@@ -80,8 +81,11 @@ const App = () => {
               <Messages appData={appData} socket={socket} mode={MessageState.IGNORED}/>
             </Box>
           </Route>
-          <Route path="/ui">
-            <UI appData={appData} />
+          <Route path="/ticker">
+            <Ticker appData={appData} backgroundColor="#f0f"/>
+          </Route>
+          <Route path="/image-chroma">
+            <ImageChroma appData={appData} backgroundColor="#f0f"/>
           </Route>
           <Route path="/">
             <Box sx={{ display: 'flex' }}>
