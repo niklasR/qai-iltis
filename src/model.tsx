@@ -3,6 +3,7 @@ export enum DataChangeType {
   SHOW_MESSAGE = 'showMessage',
   REMOVE_MESSAGE = 'removeMessage',
   UNSHOW_MESSAGE = 'unshowMessage',
+  UNARCHIVE_MESSAGE = 'unarchiveMessage',
   AMEND_FROM = 'amendFrom'
 }
 

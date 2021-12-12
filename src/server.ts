@@ -88,6 +88,11 @@ server.listen(port, async () => {
         appData.messages[i].state = MessageState.SHOWN;
         await handleAppDataUpdate();
       }
+      if (data.type === DataChangeType.UNARCHIVE_MESSAGE) {
+        const i = appData.messages.findIndex((message) => message.id === data.id);
+        appData.messages[i].state = MessageState.ARRIVED;
+        await handleAppDataUpdate();
+      }
       if (data.type === DataChangeType.AMEND_FROM) {
         const i = appData.messages.findIndex((message) => message.id === data.id);
         appData.messages[i].from = data.newFrom;

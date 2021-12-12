@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Card, Switch, CardContent, IconButton, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import { Message, MessageState, DataChangeType } from '../../model';
 import { Socket } from 'socket.io';
 
@@ -21,6 +22,10 @@ export default function MessageCard(message: Message, socket: Socket) {
     socket.emit('dataChange', { type: DataChangeType.REMOVE_MESSAGE, id: message.id });
   };
 
+  const handleUnarchive = () => {
+    socket.emit('dataChange', { type: DataChangeType.UNARCHIVE_MESSAGE, id: message.id });
+  };
+
   const getAttachment = () => {
     if (message.attachment) {
       return (
@@ -35,6 +40,11 @@ export default function MessageCard(message: Message, socket: Socket) {
       <IconButton onClick={handleRemove} aria-label="remove">
         <CloseIcon />
       </IconButton>
+      {message.state === MessageState.BIN && (
+      <IconButton onClick={handleUnarchive} aria-label="unarchive">
+        <UnarchiveIcon />
+      </IconButton>
+      )}
       <CardContent>
         <TextField id="input-from" sx={{ padding: '10px' }} label="From" variant="outlined" value={message.from} onChange={handleFromChange} />
         <br />
