@@ -1,6 +1,4 @@
 TODO
-
-- move message to seen after x loops (add NumberOfLoops to config)
 - fix bug: image distortion
 - New UI: fullscren images
 - (alex) neaten up message cards
@@ -8,6 +6,7 @@ TODO
 - map thing (react simple maps)
 
 DONE
+- move message to seen after x loops (add NumberOfLoops to config)
 - 1080p
 - (alex) move some vars to extra ts file / json / yml
 - add a 'SHOW TICKER' button that fades it up + starts it / hides with fade out transition
