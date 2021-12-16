@@ -114,7 +114,7 @@ const App = () => {
             </Box>
           </Route>
           <Route path="/chroma">
-            <Chroma appData={appData} backgroundColor={config.CHROMA_COLOR} />
+            <Chroma appData={appData} backgroundColor={config.CHROMA_COLOR} socket={socket} />
           </Route>
           <Route path="/">
             <Box sx={{ display: 'flex' }}>

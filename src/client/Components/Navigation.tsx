@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { Box, Toolbar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Switch } from '@mui/material';
 import { AppData, DataChangeType } from '../../model';
-import { Socket } from 'socket.io';
+import { Socket } from 'socket.io-client';
 
 const drawerWidth = 240;
 
