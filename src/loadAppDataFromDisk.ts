@@ -27,6 +27,9 @@ export function loadAppDataFromDisk(): AppData {
       elements: {
         ticker: {
           show: true
+        },
+        imageChroma: {
+          show: false
         }
       }
     };

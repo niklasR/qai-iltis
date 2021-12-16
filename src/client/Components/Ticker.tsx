@@ -7,7 +7,7 @@ import PageVisibility from 'react-page-visibility';
 import { AppData, MessageState } from '../../model';
 
 
-export function Ticker({ appData, backgroundColor }: { appData: AppData, backgroundColor: string }): React.ReactElement {
+export function Ticker({ appData }: { appData: AppData }): React.ReactElement {
   const theme = useTheme();
   const [pageIsVisible, setPageIsVisible] = useState(true);
 
@@ -17,7 +17,7 @@ export function Ticker({ appData, backgroundColor }: { appData: AppData, backgro
 
 
   return (
-    <Box sx={{ display: 'fixed', position: 'relative', height: '1080px', width: '1920px', backgroundColor, overflow: 'hidden' }}>
+    <>
       <Slide direction="up" in={appData.elements.ticker.show} timeout={500}>
       <Box sx={{
         position: 'absolute',
@@ -49,6 +49,6 @@ export function Ticker({ appData, backgroundColor }: { appData: AppData, backgro
         </PageVisibility>
       </Box>
     </Slide>
-    </Box >
+    </>
   );
 }

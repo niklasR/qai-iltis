@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { AppData, MessageState } from '../../model';
 
 
-export function ImageChroma({ appData, backgroundColor }: { appData: AppData, backgroundColor: string }): React.ReactElement {
+export function ImageChroma({ appData }: { appData: AppData }): React.ReactElement {
   const theme = useTheme();
 
   const message = appData.messages.find((message) => {
@@ -64,8 +64,8 @@ export function ImageChroma({ appData, backgroundColor }: { appData: AppData, ba
   </Box>);
 
   return (
-    <Box sx={{ display: 'fixed', position: 'relative', height: '1080px', width: '1920px', backgroundColor, overflow: 'hidden' }}>
+    <>
       {messageBox}
-    </Box >
+    </>
   );
 }

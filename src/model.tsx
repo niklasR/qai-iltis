@@ -5,7 +5,8 @@ export enum DataChangeType {
   UNSHOW_MESSAGE = 'unshowMessage',
   UNARCHIVE_MESSAGE = 'unarchiveMessage',
   AMEND_FROM = 'amendFrom',
-  TOGGLE_TICKER = 'toggleTicker'
+  TOGGLE_TICKER = 'toggleTicker',
+  TOGGLE_IMAGE_CHROMA = 'toggleImageChroma'
 }
 
 export interface Message {
@@ -30,12 +31,18 @@ export interface MessageAttachment {
   data: string;
   filename?: string | null;
 }
+
 export interface Ticker {
+  show: boolean;
+}
+
+export interface ImageChroma {
   show: boolean;
 }
 
 export interface UiElements {
   ticker: Ticker;
+  imageChroma: ImageChroma;
 }
 
 export interface AppData {

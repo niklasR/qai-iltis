@@ -22,6 +22,10 @@ export function Navigation({ appData, socket }: { appData: AppData, socket: Sock
     socket.emit('dataChange', { type: DataChangeType.TOGGLE_TICKER, show: event.target.checked });
   };
 
+  const handleImageToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    socket.emit('dataChange', { type: DataChangeType.TOGGLE_IMAGE_CHROMA, show: event.target.checked });
+  };
+
   return (<Drawer
     variant="permanent"
     sx={{
@@ -83,17 +87,11 @@ export function Navigation({ appData, socket }: { appData: AppData, socket: Sock
           <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Image Bin" />
         </ListItem>
         <Divider />
-        <ListItem component={Link} to="/ticker" key="ticker-chroma">
+        <ListItem component={Link} to="/chroma" key="chroma">
           <ListItemIcon>
             <LiveTvIcon />
           </ListItemIcon>
-          <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Ticker (Chroma)" />
-        </ListItem>
-        <ListItem component={Link} to="/image-chroma" key="image-chroma">
-          <ListItemIcon>
-            <LiveTvIcon />
-          </ListItemIcon>
-          <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Image (Chroma)" />
+          <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Chroma (Ticker + Image)" />
         </ListItem>
         <Divider />
 
@@ -103,6 +101,13 @@ export function Navigation({ appData, socket }: { appData: AppData, socket: Sock
           </ListItemIcon>
           <ListItemText id="switch-ticker" primary="Show Ticker" />
           <Switch edge="end" onChange={handleTickerToggle} checked={appData.elements.ticker.show} />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <BlurLinearIcon />
+          </ListItemIcon>
+          <ListItemText id="switch-image-chroma" primary="Show Image" />
+          <Switch edge="end" onChange={handleImageToggle} checked={appData.elements.imageChroma.show} />
         </ListItem>
         <Divider />
       </List>

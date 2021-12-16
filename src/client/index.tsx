@@ -12,11 +12,15 @@ import { Navigation } from './Components/Navigation';
 import { theme } from './theme';
 import { AppData, MessageState } from '../model';
 import { Images } from './Components/Images';
+import { Chroma } from './Components/Chroma';
 
 const defaultAppData: AppData = {
   messages: [],
   elements: {
     ticker: {
+      show: true
+    },
+    imageChroma: {
       show: false
     }
   }
@@ -110,11 +114,8 @@ const App = () => {
               <Images appData={appData} socket={socket} mode={MessageState.BIN} />
             </Box>
           </Route>
-          <Route path="/ticker">
-            <Ticker appData={appData} backgroundColor="#f0f" />
-          </Route>
-          <Route path="/image-chroma">
-            <ImageChroma appData={appData} backgroundColor="#f0f" />
+          <Route path="/chroma">
+            <Chroma appData={appData} backgroundColor="#f0f" />
           </Route>
           <Route path="/">
             <Box sx={{ display: 'flex' }}>

@@ -108,6 +108,10 @@ server.listen(port, async () => {
         appData.elements.ticker.show = data.show;
         await handleAppDataUpdate();
       }
+      if (data.type === DataChangeType.TOGGLE_IMAGE_CHROMA) {
+        appData.elements.imageChroma.show = data.show;
+        await handleAppDataUpdate();
+      }
     });
 
     socket.on('disconnect', () => {
