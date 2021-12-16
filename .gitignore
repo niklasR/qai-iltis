@@ -2,3 +2,5 @@ session.json
 dist
 node_modules
 appData.json
+static/*
+!static/.gitkeep

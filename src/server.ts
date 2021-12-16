@@ -1,5 +1,6 @@
 import * as fs from 'fs/promises';
 import express from "express";
+import path from "path";
 import webpack, { Configuration } from 'webpack';
 import http from 'http';
 import { Server, Socket } from "socket.io";
@@ -19,6 +20,7 @@ const app = express();
 const compiler = webpack(config as Configuration);
 const port = 8080;
 
+app.use('/static', express.static(path.join(__dirname, '../static')));
 app.use('/api', api);
 
 app.use(history());

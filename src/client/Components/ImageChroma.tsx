@@ -44,7 +44,7 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
       backgroundColor: '#666'
     }
     }>
-      <img height="100%" width="100%" src={`data:${message.attachment?.mimetype};base64,${message.attachment?.data}`} />
+      <img height="100%" width="100%" src={message.attachment.url} />
     </Box>
     {/* Caption Box */}
     <Box sx={{

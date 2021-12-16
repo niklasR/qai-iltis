@@ -14,7 +14,7 @@ export interface Message {
   text: string;
   from?: string;
   to?: string;
-  attachment?: MessageAttachment;
+  attachment?: Attachment;
   timestamp: number;
   state: MessageState;
 }
@@ -26,10 +26,9 @@ export enum MessageState {
   BIN = 'binned'
 }
 
-export interface MessageAttachment {
+export interface Attachment {
   mimetype: string;
-  data: string;
-  filename?: string | null;
+  url: string;
 }
 
 export interface Ticker {

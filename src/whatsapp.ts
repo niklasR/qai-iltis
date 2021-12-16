@@ -4,7 +4,7 @@ import WAWebJS, { Client } from 'whatsapp-web.js';
 import { v4 as uuidv4 } from 'uuid';
 import EventEmitter from 'events';
 
-import { Message, MessageState } from './model';
+import { Attachment, Message, MessageState } from './model';
 
 const SESSION_FILE_PATH = __dirname + '/../session.json';
 
@@ -26,7 +26,7 @@ class ContactsDb {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => { };
 
-export class WhatsAppClient extends EventEmitter{
+export class WhatsAppClient extends EventEmitter {
   private _client?: Client;
   private _contacts?: ContactsDb;
   private _isInitialised: boolean;
@@ -56,17 +56,17 @@ export class WhatsAppClient extends EventEmitter{
     this._client.on('message_create', async (message: WAWebJS.Message) => {
       const from = this._contacts?.getName(message.from);
       const to = this._contacts?.getName(message.to);
-      const attachment = message.hasMedia ? await message.downloadMedia() : undefined;
-      const attachmentIsImage = /jpe?g|png/.test(attachment?.mimetype || '');
-      const text = message.body;
-      if (!attachmentIsImage && !text) return;
 
-      const simpleMessage: Message = { 
+      const attachment = await this.getAttachment(message);
+      const text = message.body;
+      if (!attachment && !text) return;
+
+      const simpleMessage: Message = {
         id: uuidv4(),
         text,
         from,
         to,
-        attachment: attachmentIsImage ? attachment : undefined,
+        attachment,
         timestamp: Date.now(),
         state: MessageState.ARRIVED
       };
@@ -87,6 +87,24 @@ export class WhatsAppClient extends EventEmitter{
     console.log('WAC: Initialised client.');
     this._isInitialised = true;
     return this._client;
+  }
+
+  private async getAttachment(message: WAWebJS.Message): Promise<Attachment | undefined> {
+    console.log('handling attachment');
+    const media = message.hasMedia ? await message.downloadMedia() : undefined;
+    if (!media) return undefined;
+    console.log(JSON.stringify(media, null, 2));
+    const attachmentIsPng = /png/.test(media?.mimetype || '');
+    const attachmentIsJpeg = /jpe?g|/.test(media?.mimetype || '');
+    if (!attachmentIsPng && !attachmentIsJpeg) return undefined;
+    const extension = attachmentIsPng ? 'png' : 'jpg';
+    const filename = `/static/${uuidv4()}.${extension}`;
+    await fs.writeFile(`${__dirname}/..${filename}`, media.data, 'base64');
+
+    return {
+      mimetype: media.mimetype,
+      url: filename
+    };
   }
 
   private async loadSessionFromDisk(): Promise<any> {
