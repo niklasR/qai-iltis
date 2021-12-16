@@ -5,14 +5,13 @@ import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import { io } from 'socket.io-client';
 import { Messages } from './Components/Messages';
 import { Home } from './Components/Home';
-import { Ticker } from './Components/Ticker';
-import { ImageChroma } from './Components/ImageChroma';
 import { Header } from './Components/Header';
 import { Navigation } from './Components/Navigation';
 import { theme } from './theme';
 import { AppData, MessageState } from '../model';
 import { Images } from './Components/Images';
 import { Chroma } from './Components/Chroma';
+import { config } from '../config';
 
 const defaultAppData: AppData = {
   messages: [],
@@ -115,7 +114,7 @@ const App = () => {
             </Box>
           </Route>
           <Route path="/chroma">
-            <Chroma appData={appData} backgroundColor="#f0f" />
+            <Chroma appData={appData} backgroundColor={config.CHROMA_COLOR} />
           </Route>
           <Route path="/">
             <Box sx={{ display: 'flex' }}>

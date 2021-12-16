@@ -57,12 +57,16 @@ export class WhatsAppClient extends EventEmitter{
       const from = this._contacts?.getName(message.from);
       const to = this._contacts?.getName(message.to);
       const attachment = message.hasMedia ? await message.downloadMedia() : undefined;
+      const attachmentIsImage = /jpe?g|png/.test(attachment?.mimetype || '');
+      const text = message.body;
+      if (!attachmentIsImage && !text) return;
+
       const simpleMessage: Message = { 
         id: uuidv4(),
-        text: message.body,
+        text,
         from,
         to,
-        attachment,
+        attachment: attachmentIsImage ? attachment : undefined,
         timestamp: Date.now(),
         state: MessageState.ARRIVED
       };

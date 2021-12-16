@@ -5,7 +5,7 @@ import Slide from '@mui/material/Slide';
 import ReactTicker from 'react-ticker';
 import PageVisibility from 'react-page-visibility';
 import { AppData, MessageState } from '../../model';
-
+import { config } from '../../config';
 
 export function Ticker({ appData }: { appData: AppData }): React.ReactElement {
   const theme = useTheme();
@@ -28,7 +28,7 @@ export function Ticker({ appData }: { appData: AppData }): React.ReactElement {
       }}>
         <PageVisibility onChange={handleVisibilityChange}>
           {pageIsVisible && (
-            <ReactTicker offset={0} speed={25}>
+            <ReactTicker offset={0} speed={config.SCROLL_SPEED}>
               {({ index }) => {
                 const activeMessages = appData.messages.filter((message) => {
                   const isShowing = message.state === MessageState.SHOWING;
