@@ -29,9 +29,9 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
       top: '20px',
       paddingLeft: '10px',
       paddingRight: '10px',
-      backgroundColor: theme.palette.primary.dark
+      textAlign: 'center'
     }}>
-      <Typography fontSize={60} paragraph color='common.white'>
+      <Typography fontSize={70} fontWeight='bold' paragraph color='common.white'>
         {message.from}
       </Typography>
     </Box>
@@ -41,10 +41,11 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
       height: '500px',
       width: '100%',
       top: '160px',
-      backgroundColor: '#666'
+      display: 'flex',
+      justifyContent: 'center'
     }
     }>
-      <img height="100%" width="100%" src={message.attachment.url} />
+        <img style={{ maxHeight: '100%', maxWidth: '100%', margin: 'auto' }} src={message.attachment?.url} />
     </Box>
     {/* Caption Box */}
     <Box sx={{

@@ -30,7 +30,7 @@ export default function MessageCard(message: Message, socket: Socket) {
     if (message.attachment) {
       return (
         <p>
-          <img width="100%" src={message.attachment.url} />
+          <img style={{ maxHeight: '400px', maxWidth: '400px', margin: 'auto' }} src={message.attachment.url} />
         </p>);
     }
   };
