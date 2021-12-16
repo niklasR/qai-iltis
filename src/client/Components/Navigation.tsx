@@ -62,25 +62,25 @@ export function Navigation({ appData, socket }: { appData: AppData, socket: Sock
           <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Message Bin" />
         </ListItem>
         <Divider />
-        <ListItem component={Link} to="/images/arrived" key="Images">
+        <ListItem component={Link} to="/images/arrived" key="New Images">
           <ListItemIcon>
             <ImageIcon />
           </ListItemIcon>
           <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="New Images" />
         </ListItem>
-        <ListItem component={Link} to="/images/showing" key="Images">
+        <ListItem component={Link} to="/images/showing" key="Live Images">
           <ListItemIcon>
             <PhotoCameraBackIcon />
           </ListItemIcon>
           <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Live Image" />
         </ListItem>
-        <ListItem component={Link} to="/images/shown" key="Images">
+        <ListItem component={Link} to="/images/shown" key="Shown Images">
           <ListItemIcon>
             <BrokenImageIcon />
           </ListItemIcon>
           <ListItemText primaryTypographyProps={{ fontWeight: 'bold' }} primary="Shown Images" />
         </ListItem>
-        <ListItem component={Link} to="/images/bin" key="Images">
+        <ListItem component={Link} to="/images/bin" key="Image Bin">
           <ListItemIcon>
             <DeleteIcon />
           </ListItemIcon>

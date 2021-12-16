@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Slide, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import Slide from '@mui/material/Slide';
 import ReactTicker from 'react-ticker';
 import PageVisibility from 'react-page-visibility';
 import { AppData, DataChangeType, MessageState } from '../../model';

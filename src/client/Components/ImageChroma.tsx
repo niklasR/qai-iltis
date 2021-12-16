@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Slide, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { AppData, MessageState } from '../../model';
-
 
 export function ImageChroma({ appData }: { appData: AppData }): React.ReactElement {
   const theme = useTheme();
@@ -13,12 +12,12 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
     return isShowing && hasAttachment;
   });
 
-  const messageBox = message && (<Box sx={{
+  const messageBox = <Box sx={{
     position: 'absolute',
     height: '864px',
     width: '768px',
-    left: '880px',
-    top: '108px',
+    left: '1000px',
+    top: '65px',
     backgroundColor: theme.palette.primary.main
   }}>
     {/* Name Box */}
@@ -32,7 +31,7 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
       textAlign: 'center'
     }}>
       <Typography fontSize={70} fontWeight='bold' paragraph color='common.white'>
-        {message.from}
+        {message?.from}
       </Typography>
     </Box>
     {/* Image 'Box */}
@@ -45,7 +44,7 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
       justifyContent: 'center'
     }
     }>
-        <img style={{ maxHeight: '100%', maxWidth: '100%', margin: 'auto' }} src={message.attachment?.url} />
+      <img style={{ maxHeight: '100%', maxWidth: '100%', margin: 'auto' }} src={message?.attachment?.url} />
     </Box>
     {/* Caption Box */}
     <Box sx={{
@@ -55,18 +54,19 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
       bottom: '20px',
       paddingLeft: '10px',
       paddingRight: '10px',
+      textAlign: 'center',
       backgroundColor: theme.palette.primary.dark
     }
     }>
       <Typography fontSize={40} paragraph color='common.white'>
-        {message.text}
+        {message?.text}
       </Typography>
     </Box>
-  </Box>);
+  </Box>;
 
   return (
-    <>
+    <Slide direction="left" in={appData.elements.imageChroma.show && !!message} timeout={500}>
       {messageBox}
-    </>
+    </Slide>
   );
 }
