@@ -7,7 +7,9 @@ import { AppData, DataChangeType, MessageState } from '../../model';
 import { config } from '../../config';
 import { Socket } from 'socket.io-client';
 
-const PLACEHOLDER_MESSAGE = <p style={{ visibility: "hidden" }}>Placeholder</p>;
+const PLACEHOLDER_MESSAGE = <Typography paragraph sx={{ fontSize: 70, whiteSpace: 'nowrap', paddingRight: 20 }}>
+Join in: Send us a Whatsapp at 07470 794 554.
+</Typography>;
 
 export function Ticker({ appData, socket }: { appData: AppData, socket: Socket }): React.ReactElement {
   const theme = useTheme();
@@ -44,7 +46,7 @@ export function Ticker({ appData, socket }: { appData: AppData, socket: Socket }
                       const hasAttachment = message.attachment;
                       return isShowing && hasAttachment;
                     });
-                    if (!imageMessage) return PLACEHOLDER_MESSAGE;
+                    if (!imageMessage || !imageMessage?.text) return PLACEHOLDER_MESSAGE;
                     
                     return (<Typography paragraph sx={{ fontSize: 70, whiteSpace: 'nowrap', paddingRight: 20 }}>
                       {imageMessage.from && imageMessage.text ? `${imageMessage.from}` : ''}{imageMessage.from && imageMessage.text ? `: ${imageMessage.text}` : ''}
