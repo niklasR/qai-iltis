@@ -72,8 +72,13 @@ server.listen(port, async () => {
     socket.on('dataChange', async (data) => {
       console.log('IO: dataChange:', JSON.stringify(data));
       if (data.type === DataChangeType.SHOW_MESSAGE) {
-        const i = appData.messages.findIndex((message) => message.id === data.id);
-        if (!i) return;
+        const i = appData.messages.findIndex((message) => {
+          return message.id === data.id;
+        });
+        if (i < 0) {
+          console.log('message not found');
+          return;
+        }
         // if image, unshow any currently live images
         if (appData.messages[i].attachment) {
           appData.messages.forEach((message) => {
@@ -84,8 +89,13 @@ server.listen(port, async () => {
         await handleAppDataUpdate();
       }
       if (data.type === DataChangeType.REMOVE_MESSAGE) {
-        const i = appData.messages.findIndex((message) => message.id === data.id);
-        if (!i) return;
+        const i = appData.messages.findIndex((message) => {
+          return message.id === data.id;
+        });
+        if (i < 0) {
+          console.log('message not found');
+          return;
+        }
         if (appData.messages[i].state === MessageState.BIN) {
           appData.messages.splice(i, 1);
         } else {
@@ -94,26 +104,47 @@ server.listen(port, async () => {
         await handleAppDataUpdate();
       }
       if (data.type === DataChangeType.UNSHOW_MESSAGE) {
-        const i = appData.messages.findIndex((message) => message.id === data.id);
-        if (!i) return;
+        const i = appData.messages.findIndex((message) => {
+          return message.id === data.id;
+        });
+        if (i < 0) {
+          console.log('message not found');
+          return;
+        }
         appData.messages[i].state = MessageState.SHOWN;
         await handleAppDataUpdate();
       }
       if (data.type === DataChangeType.UNARCHIVE_MESSAGE) {
-        const i = appData.messages.findIndex((message) => message.id === data.id);
-        if (!i) return;
+        const i = appData.messages.findIndex((message) => {
+          return message.id === data.id;
+        });
+        if (i < 0) {
+          console.log('message not found');
+          return;
+        }
         appData.messages[i].state = MessageState.ARRIVED;
         await handleAppDataUpdate();
       }
       if (data.type === DataChangeType.AMEND_FROM) {
-        const i = appData.messages.findIndex((message) => message.id === data.id);
-        if (!i) return;
+        console.log(appData.messages);
+        const i = appData.messages.findIndex((message) => {
+          return message.id === data.id;
+        });
+        if (i < 0) {
+          console.log('message not found');
+          return;
+        }
         appData.messages[i].from = data.newFrom;
         await handleAppDataUpdate();
       }
       if (data.type === DataChangeType.AMEND_TEXT) {
-        const i = appData.messages.findIndex((message) => message.id === data.id);
-        if (!i) return;
+        const i = appData.messages.findIndex((message) => {
+          return message.id === data.id;
+        });
+        if (i < 0) {
+          console.log('message not found');
+          return;
+        }
         appData.messages[i].text = data.newText;
         await handleAppDataUpdate();
       }
