@@ -40,7 +40,7 @@ export default function MessageCard(message: Message, socket: Socket) {
   };
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" >
       <IconButton onClick={handleRemove} aria-label="remove">
         <CloseIcon />
       </IconButton>
@@ -53,7 +53,6 @@ export default function MessageCard(message: Message, socket: Socket) {
         <TextField id="input-from" sx={{ padding: '10px' }} label="From" variant="outlined" value={message.from} onChange={handleFromChange} />
         <br />
         <TextField id="input-text" sx={{ padding: '10px' }} label="Text" multiline variant="outlined" maxRows={4} value={message.text} onChange={handleTextChange} />
-        {/* <TextField id="input-text" sx={{ padding: '10px' }} label="Text" multiline InputProps={{ readOnly: true, }}  value={message.text} /> */}
         {getAttachment()}
         <p>
           TIME: {(new Date(message.timestamp)).toLocaleString()}
