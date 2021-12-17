@@ -37,21 +37,21 @@ export function Ticker({ appData, socket }: { appData: AppData, socket: Socket }
             {pageIsVisible && (
               <ReactTicker offset={0} speed={config.SCROLL_SPEED}>
                 {({ index }) => {
-                  if (!appData.elements.ticker.show) return PLACEHOLDER_MESSAGE;
-
+                  
                   if (appData.elements.imageChroma.show) {
                     const imageMessage = appData.messages.find((message) => {
                       const isShowing = message.state === MessageState.SHOWING;
                       const hasAttachment = message.attachment;
                       return isShowing && hasAttachment;
                     });
-
                     if (!imageMessage) return PLACEHOLDER_MESSAGE;
-
+                    
                     return (<Typography paragraph sx={{ fontSize: 70, whiteSpace: 'nowrap', paddingRight: 20 }}>
                       {imageMessage.from && imageMessage.text ? `${imageMessage.from}` : ''}{imageMessage.from && imageMessage.text ? `: ${imageMessage.text}` : ''}
                     </Typography>);
                   }
+
+                  if (!appData.elements.ticker.show) return PLACEHOLDER_MESSAGE;
 
                   const activeMessages = appData.messages.filter((message) => {
                     const isShowing = message.state === MessageState.SHOWING;
