@@ -25,12 +25,14 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
       position: 'absolute',
       height: '100px',
       width: '100%',
-      top: '20px',
+      top: '10px',
       paddingLeft: '10px',
       paddingRight: '10px',
+      display: 'flex',
+      justifyContent: 'center',
       textAlign: 'center'
     }}>
-      <Typography fontSize={70} fontWeight='bold' paragraph color='common.white'>
+      <Typography fontSize={55} fontWeight='bold' style={{ height: '100%', margin: 'auto' }} paragraph color='common.white'>
         {message?.from}
       </Typography>
     </Box>
@@ -39,7 +41,7 @@ export function ImageChroma({ appData }: { appData: AppData }): React.ReactEleme
       position: 'absolute',
       height: '500px',
       width: '100%',
-      top: '160px',
+      top: '200px',
       display: 'flex',
       justifyContent: 'center'
     }
