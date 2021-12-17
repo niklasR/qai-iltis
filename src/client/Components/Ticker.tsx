@@ -49,7 +49,7 @@ export function Ticker({ appData, socket }: { appData: AppData, socket: Socket }
                     if (!imageMessage) return PLACEHOLDER_MESSAGE;
 
                     return (<Typography paragraph sx={{ fontSize: 70, whiteSpace: 'nowrap', paddingRight: 20 }}>
-                      {imageMessage.from ? `${imageMessage.from}:` : ''} {imageMessage.text}
+                      {imageMessage.from && imageMessage.text ? `${imageMessage.from}` : ''}{imageMessage.from && imageMessage.text ? `: ${imageMessage.text}` : ''}
                     </Typography>);
                   }
 
@@ -71,7 +71,7 @@ export function Ticker({ appData, socket }: { appData: AppData, socket: Socket }
                   }
 
                   return (<Typography paragraph sx={{ fontSize: 70, whiteSpace: 'nowrap', paddingRight: 20 }}>
-                    {nextMessage.from ? `${nextMessage.from}:` : ''} {nextMessage.text}
+                    {nextMessage.from && nextMessage.text ? `${nextMessage.from}` : ''}{nextMessage.from && nextMessage.text ? `: ${nextMessage.text}` : ''}
                   </Typography>);
                 }}
               </ReactTicker>
