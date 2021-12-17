@@ -95,7 +95,7 @@ export class WhatsAppClient extends EventEmitter {
     if (!media) return undefined;
     console.log(JSON.stringify(media, null, 2));
     const attachmentIsPng = /png/.test(media?.mimetype || '');
-    const attachmentIsJpeg = /jpe?g|/.test(media?.mimetype || '');
+    const attachmentIsJpeg = /jpe?g/.test(media?.mimetype || '');
     if (!attachmentIsPng && !attachmentIsJpeg) return undefined;
     const extension = attachmentIsPng ? 'png' : 'jpg';
     const filename = `/static/${uuidv4()}.${extension}`;
