@@ -10,6 +10,10 @@ export default function MessageCard(message: Message, socket: Socket) {
     socket.emit('dataChange', { type: DataChangeType.AMEND_FROM, id: message.id, newFrom: event.target.value });
   };
 
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    socket.emit('dataChange', { type: DataChangeType.AMEND_TEXT, id: message.id, newText: event.target.value });
+  };
+
   const handleShowChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       socket.emit('dataChange', { type: DataChangeType.SHOW_MESSAGE, id: message.id });
@@ -48,7 +52,8 @@ export default function MessageCard(message: Message, socket: Socket) {
       <CardContent>
         <TextField id="input-from" sx={{ padding: '10px' }} label="From" variant="outlined" value={message.from} onChange={handleFromChange} />
         <br />
-        <TextField id="input-text" sx={{ padding: '10px' }} label="Text" multiline InputProps={{ readOnly: true, }} maxRows={4} value={message.text} />
+        <TextField id="input-text" sx={{ padding: '10px' }} label="Text" multiline variant="outlined" maxRows={4} value={message.text} onChange={handleTextChange} />
+        {/* <TextField id="input-text" sx={{ padding: '10px' }} label="Text" multiline InputProps={{ readOnly: true, }}  value={message.text} /> */}
         {getAttachment()}
         <p>
           TIME: {(new Date(message.timestamp)).toLocaleString()}

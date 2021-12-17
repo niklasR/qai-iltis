@@ -5,6 +5,7 @@ export enum DataChangeType {
   UNSHOW_MESSAGE = 'unshowMessage',
   UNARCHIVE_MESSAGE = 'unarchiveMessage',
   AMEND_FROM = 'amendFrom',
+  AMEND_TEXT = 'amendText',
   TOGGLE_TICKER = 'toggleTicker',
   TOGGLE_IMAGE_CHROMA = 'toggleImageChroma'
 }
